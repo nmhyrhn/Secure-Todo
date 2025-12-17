@@ -1,9 +1,9 @@
 package com.example.demo.util;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.JwtException;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -19,14 +19,14 @@ public class JwtUtil {
         return Jwts.builder()
                 .setSubject(email)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis()+EXPIRATION))
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
                 .signWith(SignatureAlgorithm.HS256, SECRET)
                 .compact();
     }
 
     // 토큰 검증
     public boolean validateToken(String token) {
-        try{
+        try {
             Jwts.parser()
                     .setSigningKey(SECRET)
                     .parseClaimsJws(token);
@@ -36,10 +36,11 @@ public class JwtUtil {
         }
     }
 
-    //Claims 추출
-    public Claims getCalims(String token) {
+    // Claims 추출
+    public Claims getClaims(String token) {
         return Jwts.parser()
                 .setSigningKey(SECRET)
-                .parseClaimsJws(token).getBody();
+                .parseClaimsJws(token)
+                .getBody();
     }
 }

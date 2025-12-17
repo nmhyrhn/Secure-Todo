@@ -60,7 +60,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
         }
 
-        // 다음 필터로 넘김
+        // 다음 필터로
         filterChain.doFilter(request, response);
     }
 }
