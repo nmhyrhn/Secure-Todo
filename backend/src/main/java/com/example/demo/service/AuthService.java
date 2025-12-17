@@ -4,7 +4,7 @@ import com.example.demo.domain.user.LoginRequest;
 import com.example.demo.domain.user.SignupRequest;
 import com.example.demo.domain.user.User;
 import com.example.demo.domain.user.UserRepository;
-import com.example.demo.security.JwtUtil;
+import com.example.demo.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
