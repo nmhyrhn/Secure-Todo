@@ -23,28 +23,26 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        return request.getRequestURI().startsWith("/api/auth/");
+    }
+
+    @Override
     protected void doFilterInternal(
             HttpServletRequest request,
             HttpServletResponse response,
             FilterChain filterChain
     ) throws ServletException, IOException {
 
-        // Authorization 헤더 추출
         String authHeader = request.getHeader("Authorization");
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
-
-            // "Bearer " 제거
             String token = authHeader.substring(7);
 
-            // JWT 검증
             if (jwtUtil.validateToken(token)) {
-
-                // 사용자 정보 추출
                 Claims claims = jwtUtil.getClaims(token);
                 String email = claims.getSubject();
 
-                // SecurityContext에 인증 객체 등록
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(
                                 email,
@@ -52,15 +50,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                 Collections.emptyList()
                         );
 
-                authentication.setDetails(
-                        new WebAuthenticationDetailsSource().buildDetails(request)
-                );
-
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }
 
-        // 다음 필터로
         filterChain.doFilter(request, response);
     }
 }
