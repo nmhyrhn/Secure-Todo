@@ -25,6 +25,10 @@ public class AuthService {
     }
 
     public  String login(LoginRequest request) {
+
+        System.out.println("LOGIN email = [" + request.getEmail() + "]");
+        System.out.println("LOGIN password = [" + request.getPassword() + "]");
+
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
 
