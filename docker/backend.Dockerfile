@@ -1,7 +1,7 @@
 # 빌드 단계
 FROM eclipse-temurin:21-jdk AS builder
 WORKDIR /app
-COPY ../backend/ ./
+COPY . ./          
 RUN ./gradlew build -x test
 
 # 실행 단계

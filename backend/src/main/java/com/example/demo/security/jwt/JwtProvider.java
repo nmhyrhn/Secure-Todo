@@ -8,7 +8,7 @@ import java.util.Date;
 @Component
 public class JwtProvider {
 
-    private final String SECRET_KEY = "very-secret-key";
+    private static final String SECRET_KEY = "abcdefghijklmnopqrstuvwxyz12345612342341asdf";
     private final long EXPIRATION = 1000 * 60 * 60;
 
     public String createToken(String email) {
