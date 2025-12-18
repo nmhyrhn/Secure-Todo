@@ -16,12 +16,15 @@ public class User {
 
     @Column(unique = true)
     private String email;
+
     private String password;
 
-    private String role = "USER";
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-    public User(String email, String password) {
+    public User(String email, String password, Role role) {
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 }
